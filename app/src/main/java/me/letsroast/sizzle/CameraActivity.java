@@ -25,7 +25,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "TAG";
     private Camera mCamera;
     private CameraView mCameraView;
-    private FrameLayout camera_view;
+    private RelativeLayout camera_view;
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
         @Override
@@ -54,7 +54,7 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        camera_view = (FrameLayout) findViewById(R.id.camera_preview);
+        camera_view = (RelativeLayout) findViewById(R.id.camera_preview);
         // Create an instance of Camera
         try {
             mCamera = Camera.open();//you can use open(int) to use different cameras
@@ -64,7 +64,7 @@ public class CameraActivity extends AppCompatActivity {
 
         if (mCamera != null) {
             mCameraView = new CameraView(this, mCamera);//create a SurfaceView to show camera data
-            FrameLayout camera_view = (FrameLayout) findViewById(R.id.camera_preview);
+            RelativeLayout camera_view = (RelativeLayout) findViewById(R.id.camera_preview);
             camera_view.addView(mCameraView, 0);//add the SurfaceView to the layout
         }
     }
