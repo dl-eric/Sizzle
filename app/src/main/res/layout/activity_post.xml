@@ -19,11 +19,51 @@
         tools:context="me.letsroast.sizzle.PostActivity">
 
         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cameraImagePresentedView"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_photo_camera_black_48dp" />
+            android:layout_centerInParent="true"
+            android:onClick="startCamera"
+            android:id="@+id/addPhotoLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Let&apos;s Start"
+                android:id="@+id/textView2"
+                android:layout_marginBottom="20dp"
+                android:layout_above="@+id/cameraImageView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cameraImageView"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_photo_camera_black_48dp"
+                android:alpha="0.5"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Add a Picture"
+                android:id="@+id/textView3"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/cameraImageView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center" />
+        </LinearLayout>
     </RelativeLayout>
+
 </FrameLayout>
