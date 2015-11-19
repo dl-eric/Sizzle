@@ -105,4 +105,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, PostActivity.class);
         startActivity(intent);
     }
+
+    public void goToComments(View v) {
+        Intent intent = new Intent(this, ContentActivity.class);
+        startActivity(intent);
+    }
 }
