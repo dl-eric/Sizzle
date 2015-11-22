@@ -22,7 +22,7 @@ public class Content {
         this.image = image;
         txtTitle = title;
         txtPoints = points;
-        this.comments = (ArrayList<String>) comments; // TODO: Last place worked: trying to get comment section
+        //this.comments = (ArrayList<String>) comments; // TODO: Last place worked: trying to get comment section
     }
 
     public String getTxtTitle() { return txtTitle; }
