@@ -25,15 +25,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         // each data item is just a string in this case
         public ImageView image;
         public TextView txtTitle;
-        public Button btnUpvote;
-        public Button btnDownvote;
+        public TextView txtPoints;
 
         public ViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
             txtTitle = (TextView) v.findViewById(R.id.txtTitle);
-            btnUpvote = (Button) v.findViewById(R.id.btnUpvote);
-            btnDownvote = (Button) v.findViewById(R.id.btnDownvote);
+            txtPoints = (TextView) v.findViewById(R.id.txtPoints);
 
         }
     }

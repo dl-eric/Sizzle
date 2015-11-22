@@ -13,8 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.letsroast.sizzle.Adapters.GridAdapter;
 
@@ -35,17 +41,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
+        // TODO: Make this asynchronous
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("Data");
+
+        try {
+            List<ParseObject> parseObjects = parseQuery.find();
+            for(int i = 0; i < parseObjects.size(); i++) {
+                mDataset.add(parseObjects.get(i).getString("Title"));
+            }
+        } catch (ParseException e) {
+            Toast.makeText(this, "Could not connect to databse.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
         //Initialize Main Grid
-        mDataset.add("Alpha");
-        mDataset.add("Beta");
-        mDataset.add("CupCake");
-        mDataset.add("Donut");
-        mDataset.add("Eclair");
-        mDataset.add("Froyo");
-        mDataset.add("Gingerbread");
-        mDataset.add("Honeycomb");
-        mDataset.add("Ice Cream Sandwich");
-        mDataset.add("Jellybean");
+//        mDataset.add("Alpha");
+//        mDataset.add("Beta");
+//        mDataset.add("CupCake");
+//        mDataset.add("Donut");
+//        mDataset.add("Eclair");
+//        mDataset.add("Froyo");
+//        mDataset.add("Gingerbread");
+//        mDataset.add("Honeycomb");
+//        mDataset.add("Ice Cream Sandwich");
+//        mDataset.add("Jellybean");
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
