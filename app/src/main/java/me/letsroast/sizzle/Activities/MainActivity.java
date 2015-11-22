@@ -1,10 +1,13 @@
 package me.letsroast.sizzle.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.letsroast.sizzle.Activities.ContentActivity;
+import me.letsroast.sizzle.Activities.PostActivity;
 import me.letsroast.sizzle.Adapters.GridAdapter;
 import me.letsroast.sizzle.Model.Content;
 import me.letsroast.sizzle.R;
@@ -31,43 +36,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
-    ArrayList<Content> mDataset = new ArrayList<>();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    ArrayList<Content> mDataset;
+
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
+
         //Setup Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
-        // TODO: Make this asynchronous
-        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("Data");
-
-        try {
-            List<ParseObject> parseObjects = parseQuery.find();
-            for(int i = 0; i < parseObjects.size(); i++) {
-                mDataset.add(new Content(
-                        null, // Image
-                        parseObjects.get(i).getString("Title"),
-                        parseObjects.get(i).getNumber("Points").toString()));
-            }
-        } catch (ParseException e) {
-            Toast.makeText(this, "Could not connect to databse.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-
-        GridLayoutManager glm = new GridLayoutManager(this, 2);
-
-        mAdapter = new GridAdapter(mDataset);
-
-        mRecyclerView.setLayoutManager(glm);
-        mRecyclerView.setAdapter(mAdapter);
+        getData();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        handleRefresh();
     }
 
     @Override
@@ -113,6 +103,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void getData() {
+        mDataset = new ArrayList<>();
+        // TODO: Make this asynchronous
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("Data");
+
+        try {
+            List<ParseObject> parseObjects = parseQuery.find();
+            for(int i = 0; i < parseObjects.size(); i++) {
+                mDataset.add(new Content(
+                        null, // Image
+                        parseObjects.get(i).getString("Title"),
+                        parseObjects.get(i).getNumber("Points").toString(),
+                        parseObjects.get(i).getParseObject("Comments"))); // TODO: THIS IS BAD. LOADS ENTIRE COMMENTS FOR EACH THING.
+            }
+        } catch (ParseException e) {
+            Toast.makeText(this, "Could not connect to database.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+
+        GridLayoutManager glm = new GridLayoutManager(this, 2);
+
+        mAdapter = new GridAdapter(mDataset);
+
+        mRecyclerView.setLayoutManager(glm);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     public void goToPostActivity(View v) {
         Intent intent = new Intent(this, PostActivity.class);
         startActivity(intent);
@@ -122,4 +142,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, ContentActivity.class);
         startActivity(intent);
     }
+
+    private void handleRefresh() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                refreshItems();
+            }
+        });
+    }
+
+    private void refreshItems() {
+        // Load items
+        getData();
+
+        // Load complete
+        onItemsLoadComplete();
+    }
+
+    private void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
+
+        // Stop refresh animation
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    public static Context getContext() { return context; }
 }

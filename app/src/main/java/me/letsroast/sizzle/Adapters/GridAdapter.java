@@ -5,6 +5,7 @@ package me.letsroast.sizzle.Adapters;
  */
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import me.letsroast.sizzle.Activities.ContentActivity;
+import me.letsroast.sizzle.Activities.MainActivity;
 import me.letsroast.sizzle.Model.Content;
 import me.letsroast.sizzle.R;
 
@@ -32,7 +35,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
             image = (ImageView) v.findViewById(R.id.image);
             txtTitle = (TextView) v.findViewById(R.id.txtTitle);
             txtPoints = (TextView) v.findViewById(R.id.txtPoints);
-
         }
     }
 
@@ -64,7 +66,19 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.getContext(), ContentActivity.class);
+                intent.putExtra("Title", mDataset.get(position).getTxtTitle());
+                intent.putExtra("Index", position);
+                intent.putExtra("Comments", mDataset.get(position).getComments());
+                MainActivity.getContext().startActivity(intent);
+            }
+        });
+
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.txtTitle.setText(mDataset.get(position).getTxtTitle());

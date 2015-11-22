@@ -24,8 +24,7 @@
                 android:background="#d3d3d3"
                 android:minWidth="150dp"
                 android:minHeight="150dp"
-                android:id="@+id/image"
-                android:onClick="goToComments" />
+                android:id="@+id/image" />
 
             <TextView android:layout_width="match_parent"
                 android:layout_marginTop="2dp"

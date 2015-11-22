@@ -2,6 +2,12 @@ package me.letsroast.sizzle.Model;
 
 import android.graphics.Bitmap;
 
+import com.parse.ParseObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Eric on 11/10/2015.
  */
@@ -10,10 +16,13 @@ public class Content {
     private String txtPoints;
     private Bitmap image;
 
-    public Content(Bitmap image, String title, String points) {
+    private ArrayList<String> comments;
+
+    public Content(Bitmap image, String title, String points, ParseObject comments) {
         this.image = image;
         txtTitle = title;
         txtPoints = points;
+        this.comments = (ArrayList<String>) comments; // TODO: Last place worked: trying to get comment section
     }
 
     public String getTxtTitle() { return txtTitle; }
@@ -21,4 +30,6 @@ public class Content {
     public String getTxtPoints() { return txtPoints; }
 
     public Bitmap getImage() { return image; }
+
+    public ArrayList getComments() { return comments; };
 }
