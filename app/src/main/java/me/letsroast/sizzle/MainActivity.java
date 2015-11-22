@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
-    ArrayList<String> mDataset = new ArrayList<>();
+    ArrayList<Content> mDataset = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             List<ParseObject> parseObjects = parseQuery.find();
             for(int i = 0; i < parseObjects.size(); i++) {
-                mDataset.add(parseObjects.get(i).getString("Title"));
+                mDataset.add(new Content(
+                        null, // Image
+                        parseObjects.get(i).getString("Title"),
+                        parseObjects.get(i).getNumber("Points").toString()));
             }
         } catch (ParseException e) {
             Toast.makeText(this, "Could not connect to databse.", Toast.LENGTH_LONG).show();

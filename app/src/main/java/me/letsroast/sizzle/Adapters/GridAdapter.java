@@ -13,10 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import me.letsroast.sizzle.Content;
 import me.letsroast.sizzle.R;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
-    private ArrayList<String> mDataset;
+    private ArrayList<Content> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,7 +37,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, Content item) {
         mDataset.add(position, item);
         notifyItemInserted(position);
     }
@@ -48,7 +49,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public GridAdapter(ArrayList<String> myDataset) {
+    public GridAdapter(ArrayList<Content> myDataset) {
         mDataset = myDataset;
     }
 
@@ -67,7 +68,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.txtTitle.setText(mDataset.get(position));
+        holder.txtTitle.setText(mDataset.get(position).getTxtTitle());
+        holder.txtPoints.setText(mDataset.get(position).getTxtPoints());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
