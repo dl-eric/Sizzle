@@ -1,4 +1,4 @@
-package me.letsroast.sizzle;
+package me.letsroast.sizzle.Activities;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import me.letsroast.sizzle.Adapters.LinearAdapter;
 import me.letsroast.sizzle.Decoration.DividerItemDecoration;
+import me.letsroast.sizzle.R;
 
 public class ContentActivity extends AppCompatActivity {
 

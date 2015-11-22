@@ -1,4 +1,4 @@
-package me.letsroast.sizzle;
+package me.letsroast.sizzle.Activities;
 
 import android.hardware.Camera;
 import android.net.Uri;
@@ -18,6 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import me.letsroast.sizzle.CameraView;
+import me.letsroast.sizzle.R;
 
 public class CameraActivity extends AppCompatActivity {
 

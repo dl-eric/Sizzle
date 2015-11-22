@@ -1,4 +1,4 @@
-package me.letsroast.sizzle;
+package me.letsroast.sizzle.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,7 +7,9 @@ import android.os.Bundle;
 
 import com.parse.Parse;
 
-public class SplashScreen extends AppCompatActivity {
+import me.letsroast.sizzle.R;
+
+public class SplashActivity extends AppCompatActivity {
 
     // Duration of wait in milliseconds
     private final int SPLASH_DISPLAY_LENGTH = 2500;
@@ -27,9 +29,9 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 // Create an Intent that will start the Menu-Activity.
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                SplashScreen.this.startActivity(intent);
-                SplashScreen.this.finish();
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                SplashActivity.this.startActivity(intent);
+                SplashActivity.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

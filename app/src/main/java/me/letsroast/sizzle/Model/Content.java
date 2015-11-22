@@ -1,4 +1,4 @@
-package me.letsroast.sizzle;
+package me.letsroast.sizzle.Model;
 
 import android.graphics.Bitmap;
 

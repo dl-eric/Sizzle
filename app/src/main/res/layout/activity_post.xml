@@ -16,7 +16,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="me.letsroast.sizzle.PostActivity">
+        tools:context="me.letsroast.sizzle.Activities.PostActivity">
 
         <ImageView
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package me.letsroast.sizzle;
+package me.letsroast.sizzle.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.letsroast.sizzle.Adapters.GridAdapter;
+import me.letsroast.sizzle.Model.Content;
+import me.letsroast.sizzle.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
