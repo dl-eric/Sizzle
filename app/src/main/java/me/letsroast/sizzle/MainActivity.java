@@ -57,18 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        //Initialize Main Grid
-//        mDataset.add("Alpha");
-//        mDataset.add("Beta");
-//        mDataset.add("CupCake");
-//        mDataset.add("Donut");
-//        mDataset.add("Eclair");
-//        mDataset.add("Froyo");
-//        mDataset.add("Gingerbread");
-//        mDataset.add("Honeycomb");
-//        mDataset.add("Ice Cream Sandwich");
-//        mDataset.add("Jellybean");
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
 
