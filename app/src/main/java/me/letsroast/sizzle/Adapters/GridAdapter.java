@@ -74,7 +74,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 Intent intent = new Intent(MainActivity.getContext(), ContentActivity.class);
                 intent.putExtra("Title", mDataset.get(position).getTxtTitle());
                 intent.putExtra("Index", position);
-                intent.putExtra("Comments", mDataset.get(position).getComments());
+                intent.putExtra("Points", mDataset.get(position).getTxtPoints());
                 MainActivity.getContext().startActivity(intent);
             }
         });

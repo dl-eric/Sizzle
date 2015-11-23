@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mDataset.add(new Content(
                         null, // Image
                         parseObjects.get(i).getString("Title"),
-                        parseObjects.get(i).getNumber("Points").toString(),
-                        parseObjects.get(i).getParseObject("Comments"))); // TODO: THIS IS BAD. LOADS ENTIRE COMMENTS FOR EACH THING.
+                        parseObjects.get(i).getNumber("Points").toString()));
             }
         } catch (ParseException e) {
             Toast.makeText(this, "Could not connect to database.", Toast.LENGTH_LONG).show();

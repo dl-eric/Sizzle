@@ -18,7 +18,7 @@ public class Content {
 
     private ArrayList<String> comments;
 
-    public Content(Bitmap image, String title, String points, ParseObject comments) {
+    public Content(Bitmap image, String title, String points) {
         this.image = image;
         txtTitle = title;
         txtPoints = points;
