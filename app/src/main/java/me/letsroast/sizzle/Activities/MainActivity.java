@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
             List<ParseObject> parseObjects = parseQuery.find();
-            for(int i = 0; i < parseObjects.size(); i++) {
+            for (int i = 0; i < parseObjects.size(); i++) {
                 mDataset.add(new Content(
                         null, // Image
                         parseObjects.get(i).getString("Title"),
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void refreshItems() {
         // Load items
-        getData();
+        getData(); // TODO: Make this notify, so it's asynchronous
 
         // Load complete
         onItemsLoadComplete();
@@ -169,5 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
-    public static Context getContext() { return context; }
+    public static Context getContext() {
+        return context;
+    }
 }
